@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>House Price Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <header>
+        <h1>🏠 House Price Predictor</h1>
+        <p>Estimate the market value of a house based on its features</p>
+    </header>
+
+    <main>
+        <div class="container">
+            <form action="/predict" method="POST">
+                <div class="grid">
+                    {% set field_labels = {
+                        'Id': 'House ID',
+                        'LotArea': 'Lot Area (sq ft)',
+                        'OverallQual': 'Overall Quality',
+                        'OverallCond': 'Overall Condition',
+                        'MasVnrArea': 'Masonry Veneer Area',
+                        'BsmtFinSF2': 'Bsmt Finished SF 2',
+                        'BsmtUnfSF': 'Bsmt Unfinished SF',
+                        'TotalBsmtSF': 'Total Basement SF',
+                        'FirstFlrSF': '1st Floor SF',
+                        'SecondFlrSF': '2nd Floor SF',
+                        'LowQualFinSF': 'Low Quality Finished SF',
+                        'GrLivArea': 'Ground Living Area',
+                        'BsmtFullBath': 'Basement Full Bath',
+                        'BsmtHalfBath': 'Basement Half Bath',
+                        'FullBath': 'Full Bathrooms',
+                        'HalfBath': 'Half Bathrooms',
+                        'BedroomAbvGr': 'Bedrooms Above Ground',
+                        'KitchenAbvGr': 'Kitchens Above Ground',
+                        'TotRmsAbvGrd': 'Total Rooms Above Ground',
+                        'Fireplaces': 'Number of Fireplaces',
+                        'GarageCars': 'Garage (Cars)',
+                        'WoodDeckSF': 'Wood Deck Area',
+                        'OpenPorchSF': 'Open Porch Area',
+                        'EnclosedPorch': 'Enclosed Porch Area',
+                        'ThreeSsnPorch': '3 Season Porch',
+                        'ScreenPorch': 'Screen Porch',
+                        'PoolArea': 'Pool Area',
+                        'MiscVal': 'Miscellaneous Value'
+                    } %}
+
+                    {% for name, label in field_labels.items() %}
+                    <div class="input-box">
+                        <label>{{ label }}</label>
+                        {% if name == 'Id' %}
+                        <input type="number" name="{{ name }}" step="1" required>
+                        {% else %}
+                        <input type="number" step="any" name="{{ name }}" min="0" required>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Buttons Centered & Styled -->
+                <div class="flex flex-col items-center space-y-4 mt-6">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full shadow-lg flex items-center space-x-2">
+                        🔍 <span>Predict House Price</span>
+                    </button>
+
+                    <a href="/dashboard" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-full shadow-lg flex items-center space-x-2">
+                        🛠️ <span>Admin Dashboard</span>
+                    </a>
+
+
+                </div>
+
+            </form>
+
+            {% if prediction_text %}
+                <div class="prediction-box">
+                    <h3>{{ prediction_text }}</h3>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <footer>
+        <p>✨ Built with Flask and ML | © 2025 Krish</p>
+    </footer>
+</body>
+</html>

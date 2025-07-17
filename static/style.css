@@ -1,0 +1,126 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(to right, #f9fbff, #eef3ff);
+    color: #2c3e50;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: url('https://www.toptal.com/designers/subtlepatterns/patterns/memphis-mini.png'),
+    linear-gradient(to right, #fdfefe, #e3f2fd);
+
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 3rem 1rem 1.5rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #2563eb;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: #6b7280;
+    font-size: 1.1rem;
+}
+
+/* Main Container */
+.container {
+    max-width: 1000px;
+    background-color: #ffffff;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+/* Form Grid */
+form .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Input Box */
+.input-box label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #374151;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    background-color: #f9fafb;
+    transition: border-color 0.3s ease;
+}
+
+.input-box input:focus {
+    border-color: #2563eb;
+    outline: none;
+    background-color: #ffffff;
+}
+
+/* Button */
+button[type="submit"] {
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 9999px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+button[type="submit"]:hover {
+    background-color: #1e40af;
+}
+
+/* Prediction Box */
+.prediction-box {
+    text-align: center;
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #dcfce7;
+    border: 1px solid #34d399;
+    border-radius: 1rem;
+    color: #065f46;
+    font-size: 1.2rem;
+    font-weight: 600;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    font-size: 0.95rem;
+    color: #9ca3af;
+    margin-top: auto;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
