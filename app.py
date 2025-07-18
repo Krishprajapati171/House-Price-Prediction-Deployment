@@ -10,6 +10,15 @@ app.secret_key = 'your_secret_key_here'
 ADMIN_USERNAME = 'krish'
 ADMIN_PASSWORD = 'Krish@32900'
 
+# 🔐 FreeSQLDatabase connection details
+DB_CONFIG = {
+    'host': 'sql12.freesqldatabase.com',   # ✅ Replace with your actual host
+    'user': 'sql12790611',                # ✅ Replace with your actual username
+    'password': 'AwccmwR6KZ',        # ✅ Replace with your actual password
+    'database': 'sql12790611',            # ✅ Replace with your actual DB name
+    'port': 3306
+}
+
 # Load model and scaler
 model = joblib.load('house_price_model.pkl')
 scaler = joblib.load('scaler.pkl')
@@ -17,12 +26,7 @@ scaler = joblib.load('scaler.pkl')
 # ✅ Check if feature_id already exists in DB
 def is_duplicate_id(feature_id):
     try:
-        connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="Krishprajapati02112004",
-            database="house_price_db"
-        )
+        connection = mysql.connector.connect(**DB_CONFIG)
         cursor = connection.cursor()
         cursor.execute("SELECT COUNT(*) FROM predictions WHERE feature_id = %s", (feature_id,))
         count = cursor.fetchone()[0]
@@ -36,12 +40,7 @@ def is_duplicate_id(feature_id):
 # ✅ Insert prediction data into MySQL
 def insert_data_to_mysql(data, predicted_price):
     try:
-        connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="Krishprajapati02112004",
-            database="house_price_db"
-        )
+        connection = mysql.connector.connect(**DB_CONFIG)
         cursor = connection.cursor()
         sql = """
         INSERT INTO predictions (
@@ -133,12 +132,7 @@ def dashboard():
         return redirect(url_for('login'))
 
     try:
-        connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            password="Krishprajapati02112004",
-            database="house_price_db"
-        )
+        connection = mysql.connector.connect(**DB_CONFIG)
         cursor = connection.cursor(dictionary=True)
         cursor.execute("SELECT * FROM predictions ORDER BY feature_id ASC")
         records = cursor.fetchall()
